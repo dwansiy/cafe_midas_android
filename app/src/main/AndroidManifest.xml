@@ -40,8 +40,8 @@
 
         <activity android:name=".activity.UserMainActivity" />
         <activity android:name=".activity.UserBuyListActivity" />
-        <activity android:name=".activity.UserBuyDetailActivity" />
         <activity android:name=".activity.UserOrderActivity" />
+        <activity android:name=".activity.UserBuyDetailActivity" />
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

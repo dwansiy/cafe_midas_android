@@ -26,7 +26,7 @@ public interface OrderService {
     Call<List<OrderItem>> getDetailOrder(@Field("id") String id, @Field("pw") String pw, @Field("order_id") int orderId);
 
     @POST("/create_order/")
-    Call<String> postOrder(@Body OrderMenuList orderMenuList);
+    Call<Order> postOrder(@Body OrderMenuList orderMenuList);
 
 
     //주문 처리 상태 - int(0 : pending, 1 : 처리완료, 2 : 전체)

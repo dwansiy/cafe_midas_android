@@ -208,21 +208,20 @@ public class UserOrderActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                for (Product orderMenu : response.body()) {
-                    if (orderMenu.getType() == category_list.get(0).getId()) {
-                        orderMenu.setCategory(category_list.get(0).getName());
-                        Log.d("user_order", orderMenu.getName());
-                        menu_list.add(orderMenu);
+                if (!response.body().isEmpty()) {
+                    for (Product orderMenu : response.body()) {
+                        if (!category_list.isEmpty() && orderMenu.getType() == category_list.get(0).getId()) {
+                            orderMenu.setCategory(category_list.get(0).getName());
+                            menu_list.add(orderMenu);
+                        }
                     }
+                    menuAdapter.notifyDataSetChanged();
                 }
-                menuAdapter.notifyDataSetChanged();
-
-
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                Log.d("user_order", "menu 연결실패");
+                Toast.makeText(UserOrderActivity.this, getString(R.string.error_network), Toast.LENGTH_SHORT).show();
             }
         });
         mAdapter.notifyDataSetChanged();

@@ -1,6 +1,7 @@
 package com.xema.cafemidas.network;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
@@ -12,6 +13,7 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.xema.cafemidas.R;
+import com.xema.cafemidas.activity.SignInActivity;
 
 import java.util.Map;
 
@@ -44,20 +46,26 @@ public class MidasFirebaseMessagingService extends FirebaseMessagingService {
         makeNotification(message, data);
     }
 
+    // TODO: 2018-05-27
     private void makeNotification(String message, @Nullable Map<String, String> data) {
-        Intent intent = null;
-        if (data != null) {
-        }
+
+        Intent intent = new Intent(this, SignInActivity.class);
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent, PendingIntent.FLAG_ONE_SHOT);
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Cafe Midas")
                 .setContentText(message)
                 .setAutoCancel(true)
-                .setSound(defaultSoundUri);
-        // TODO: ic_app_icon_foreground 일때 푸쉬 인텐트 처리
-        //.setContentIntent(pendingIntent);
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notificationBuilder.build());
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 }

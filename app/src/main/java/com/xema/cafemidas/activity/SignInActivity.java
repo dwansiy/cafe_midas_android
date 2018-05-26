@@ -183,13 +183,14 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void attemptSignUp(String id, String password, String name) {
-        String firebaseToken = FirebaseInstanceId.getInstance().getToken();
-        if (TextUtils.isEmpty(firebaseToken)) {
-            firebaseToken = "000000";
+        String firebaseToken = "000000";
+        if (FirebaseInstanceId.getInstance() != null) {
+            String token = FirebaseInstanceId.getInstance().getToken();
+            if (!TextUtils.isEmpty(token)) firebaseToken = token;
         }
 
         LoadingProgressDialog.showProgress(this);
-        ApiUtil.getAccountService().signUp(id, password, name,firebaseToken).enqueue(new Callback<ApiResult>() {
+        ApiUtil.getAccountService().signUp(id, password, name, firebaseToken).enqueue(new Callback<ApiResult>() {
             @Override
             public void onResponse(@NonNull Call<ApiResult> call, @NonNull Response<ApiResult> response) {
                 LoadingProgressDialog.hideProgress();
