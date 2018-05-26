@@ -29,9 +29,10 @@
             android:label="@string/app_name" />
         <activity android:name=".activity.CategoryActivity" />
         <activity android:name=".activity.ProfileListActivity" />
-        <activity android:name=".activity.AddProfileActivity"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
-
+        <activity
+            android:name=".activity.AddProfileActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity android:name=".activity.DetailProductActivity" />
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

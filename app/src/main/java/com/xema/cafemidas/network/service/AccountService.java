@@ -42,7 +42,7 @@ public interface AccountService {
     //회원탈퇴 시키기
     @FormUrlEncoded
     @POST("/remove_user_by_id/")
-    Call<ApiResult> dropAccountById(@Field("id") String id, @Field("pw") String pw, @Field("uid") String uid);
+    Call<ApiResult> dropAccountById(@Field("id") String id, @Field("pw") String pw, @Field("uid") int uid);
 
     @Multipart
     @POST("/change_profile_image/")
