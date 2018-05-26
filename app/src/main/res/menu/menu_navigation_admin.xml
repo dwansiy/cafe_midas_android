@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_menu"
+            android:icon="@drawable/ic_drink"
+            android:title="메뉴 설정" />
+        <item
+            android:id="@+id/nav_order"
+            android:icon="@drawable/ic_order"
+            android:title="주문 관리" />
+        <item
+            android:id="@+id/nav_customer"
+            android:icon="@drawable/ic_face"
+            android:title="회원관리" />
+        <item
+            android:id="@+id/nav_statistic"
+            android:icon="@drawable/ic_chart"
+            android:title="통계" />
+    </group>
+
+    <item android:title="기타">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_setting"
+                android:title="설정" />
+            <item
+                android:id="@+id/nav_sign_out"
+                android:icon="@drawable/ic_sign_out"
+                android:title="로그아웃" />
+        </menu>
+    </item>
+
+</menu>
