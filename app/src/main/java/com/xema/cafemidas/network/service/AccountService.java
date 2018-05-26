@@ -4,6 +4,7 @@ import android.support.annotation.Keep;
 
 import com.xema.cafemidas.model.ApiResult;
 import com.xema.cafemidas.model.Photo;
+import com.xema.cafemidas.model.Product;
 import com.xema.cafemidas.model.Profile;
 
 import java.util.List;
@@ -44,15 +45,25 @@ public interface AccountService {
     @POST("/remove_user_by_id/")
     Call<ApiResult> dropAccountById(@Field("id") String id, @Field("pw") String pw, @Field("uid") int uid);
 
+    //개인정보수정(본인)
     @Multipart
-    @POST("/change_profile_image/")
-    Call<Photo> uploadProfileImage(@Part MultipartBody.Part id, @Part MultipartBody.Part pw, @Part MultipartBody.Part profileImage);
+    @POST("/edit_user/")
+    Call<Profile> editProfile(@Part MultipartBody.Part id, @Part MultipartBody.Part pw, @Part MultipartBody.Part name, @Part MultipartBody.Part image, @Part MultipartBody.Part comment);
 
+    //개인정보수정(본인- 사진없을때)
     @FormUrlEncoded
-    @POST("/change_profile_name/")
-    Call<ApiResult> changeProfileName(@Field("id") String id, @Field("pw") String pw, @Field("name") String name);
+    @POST("/edit_user/")
+    Call<Profile> editProfile(@Field("id") String id, @Field("pw") String pw, @Field("name") String name, @Field("comment") String comment);
 
+    //개인정보수정(관리자가)
+    @Multipart
+    @POST("/edit_user_by_id/")
+    Call<Profile> editProfileById(@Part MultipartBody.Part id, @Part MultipartBody.Part pw, @Part MultipartBody.Part uid, @Part MultipartBody.Part name, @Part MultipartBody.Part image, @Part MultipartBody.Part comment);
+
+
+    //개인정보수정(관리자가- 사진없을때)
     @FormUrlEncoded
-    @POST("/change_profile_comment/")
-    Call<ApiResult> changeProfileComment(@Field("id") String id, @Field("pw") String pw, @Field("comment") String comment);
+    @POST("/remove_user_by_id/")
+    Call<Profile> editProfileById(@Field("id") String id, @Field("pw") String pw, @Field("uid") int uid, @Field("name") String name, @Field("comment") String comment);
+
 }

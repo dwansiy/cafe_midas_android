@@ -2,6 +2,7 @@ package com.xema.cafemidas.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +14,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.xema.cafemidas.R;
+import com.xema.cafemidas.activity.EditProfileActivity;
 import com.xema.cafemidas.common.Constants;
 import com.xema.cafemidas.common.GlideApp;
 import com.xema.cafemidas.common.PreferenceHelper;
@@ -75,7 +78,9 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ListItem
                         Toast.makeText(mContext, "자기 자신은 삭제할 수 없습니다", Toast.LENGTH_SHORT).show();
                     }
                 } else if (item.getItemId() == R.id.menu_edit) {
-                    // TODO: 2018-05-26 수정하기
+                    Intent intent = new Intent(mContext, EditProfileActivity.class);
+                    intent.putExtra("profile", profile);
+                    mContext.startActivity(intent);
                 }
                 return false;
             });
@@ -117,7 +122,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ListItem
 
     final static class ListItemViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_profile)
-        ImageView ivProfile;
+        RoundedImageView ivProfile;
         @BindView(R.id.tv_profile)
         TextView tvProfile;
         @BindView(R.id.tv_name)

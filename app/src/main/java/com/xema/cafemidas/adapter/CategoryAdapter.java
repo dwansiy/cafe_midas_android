@@ -1,6 +1,8 @@
 package com.xema.cafemidas.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +11,16 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.ChildViewHolder;
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 import com.bignerdranch.expandablerecyclerview.ParentViewHolder;
 import com.xema.cafemidas.R;
+import com.xema.cafemidas.activity.EditProfileActivity;
+import com.xema.cafemidas.common.PreferenceHelper;
 import com.xema.cafemidas.model.Category;
 import com.xema.cafemidas.model.Product;
 import com.xema.cafemidas.util.CommonUtil;
@@ -65,6 +71,16 @@ public class CategoryAdapter extends ExpandableRecyclerAdapter<Category, Product
         this.onDeleteProductListener = onDeleteProductListener;
     }
 
+    private OnEditProductListener onEditProductListener;
+
+    public interface OnEditProductListener {
+        void onEditProduct(Product product, int parentPosition, int childPosition);
+    }
+
+    public void setOnEditProductListener(OnEditProductListener onEditProductListener) {
+        this.onEditProductListener = onEditProductListener;
+    }
+
     public CategoryAdapter(Context context, @NonNull List<Category> categoryList) {
         super(categoryList);
         mContext = context;
@@ -92,6 +108,23 @@ public class CategoryAdapter extends ExpandableRecyclerAdapter<Category, Product
 
     @Override
     public void onBindChildViewHolder(@NonNull ProductViewHolder productViewHolder, int parentPosition, int childPosition, @NonNull Product product) {
+        productViewHolder.llBackground.setOnLongClickListener(v -> {
+            PopupMenu menu = new PopupMenu(mContext, productViewHolder.llBackground);
+            ((Activity) mContext).getMenuInflater().inflate(R.menu.menu_delete_edit, menu.getMenu());
+            menu.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == R.id.menu_delete) {
+                    if (onDeleteProductListener != null)
+                        onDeleteProductListener.onDeleteProduct(product, parentPosition, childPosition);
+                } else if (item.getItemId() == R.id.menu_edit) {
+                    if (onEditProductListener != null)
+                        onEditProductListener.onEditProduct(product, parentPosition, childPosition);
+                }
+                return false;
+            });
+            menu.show();
+            return false;
+        });
+
         productViewHolder.bind(mContext, product, onDeleteProductListener, parentPosition, childPosition);
     }
 
@@ -166,11 +199,6 @@ public class CategoryAdapter extends ExpandableRecyclerAdapter<Category, Product
         void bind(Context context, Product product, OnDeleteProductListener onDeleteProductListener, int parentPosition, int childPosition) {
             tvName.setText(product.getName());
             tvPrice.setText(context.getString(R.string.format_price, CommonUtil.toDecimalFormat(product.getPrice())));
-            llBackground.setOnLongClickListener(v -> {
-                if (onDeleteProductListener != null)
-                    onDeleteProductListener.onDeleteProduct(product, parentPosition, childPosition);
-                return false;
-            });
         }
     }
 }

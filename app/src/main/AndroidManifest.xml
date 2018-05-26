@@ -33,7 +33,9 @@
             android:name=".activity.AddProfileActivity"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity android:name=".activity.DetailProductActivity" />
-
+        <activity
+            android:name=".activity.EditProfileActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

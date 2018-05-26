@@ -62,9 +62,15 @@ public class ProfileListActivity extends AppCompatActivity {
         initToolbar();
         initListeners();
         initAdapter();
-        queryProfiles();
+        //queryProfiles();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // TODO: 2018-05-27 최적화
+        queryProfiles();
+    }
 
     private void initToolbar() {
         setSupportActionBar(tbMain);
@@ -126,6 +132,7 @@ public class ProfileListActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     List<Profile> profileList = response.body();
                     if (profileList != null) {
+                        tbMain.setTitle("사용자 " + mList.size() + "명");
                         if (profileList.isEmpty()) {
                             rvMain.setVisibility(View.GONE);
                             llEmpty.setVisibility(View.VISIBLE);

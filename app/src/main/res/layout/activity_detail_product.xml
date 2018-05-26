@@ -28,40 +28,28 @@
                 android:paddingRight="16dp"
                 android:paddingTop="10dp">
 
-                <LinearLayout
+
+                <com.xema.cafemidas.widget.FontTextView
+                    android:id="@+id/ftv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="80dp"
+                    android:textColor="@color/colorGray1"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:font_name="nanum_b.ttf" />
 
-                    <com.xema.cafemidas.widget.FontTextView
-                        android:id="@+id/ftv_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginStart="3dp"
-                        android:text="아메리카노 외 1종"
-                        android:textColor="@color/colorGray1"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        app:font_name="nanum_ul.ttf" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="0dp" />
-
-                    <TextView
-                        android:id="@+id/tv_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginStart="3dp"
-                        android:text="123213원"
-                        android:textColor="@color/colorRed2"
-                        android:textSize="19sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                <com.xema.cafemidas.widget.FontTextView
+                    android:id="@+id/ftv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/colorRed"
+                    android:textSize="20sp"
+                    app:font_name="nanum_l.ttf" />
 
             </LinearLayout>
 

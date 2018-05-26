@@ -36,6 +36,14 @@ public interface ProductService {
     @POST("/create_menu/")
     Call<Product> makeProduct(@Part MultipartBody.Part id, @Part MultipartBody.Part pw, @Part MultipartBody.Part categoryId, @Part MultipartBody.Part name, @Part MultipartBody.Part price, @Part MultipartBody.Part time, @Part MultipartBody.Part image);
 
+    @Multipart
+    @POST("/edit_menu/")
+    Call<Product> editProduct(@Part MultipartBody.Part id, @Part MultipartBody.Part pw, @Part MultipartBody.Part categoryId, @Part MultipartBody.Part menuId, @Part MultipartBody.Part name, @Part MultipartBody.Part price, @Part MultipartBody.Part time, @Part MultipartBody.Part image);
+
+    @FormUrlEncoded
+    @POST("/edit_menu/")
+    Call<Product> editProduct(@Field("id") String id, @Field("pw") String password, @Field("menu_id") int menuId, @Field("category_id") int categoryId, @Field("price") long price, @Field("name") String name, @Field("taking_time") int takingTime);
+
     @FormUrlEncoded
     @POST("/delete_menu/")
     Call<ApiResult> deleteProduct(@Field("id") String id, @Field("pw") String password, @Field("menu_id") int menuId);

@@ -1,5 +1,7 @@
 package com.xema.cafemidas.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by xema0 on 2018-05-26.
  */
@@ -10,6 +12,8 @@ public class Product {
     private String name;
     private int type;//category id
     private int orderId;
+    @SerializedName("taking_time")
+    private int takingTime;
     private String image;
 
     public int getId() {
@@ -58,5 +62,13 @@ public class Product {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getTakingTime() {
+        return takingTime;
+    }
+
+    public void setTakingTime(int takingTime) {
+        this.takingTime = takingTime;
     }
 }

@@ -22,6 +22,7 @@ import com.xema.cafemidas.adapter.CategoryAdapter;
 import com.xema.cafemidas.common.PreferenceHelper;
 import com.xema.cafemidas.dialog.AddCategoryDialog;
 import com.xema.cafemidas.dialog.AddProductDialog;
+import com.xema.cafemidas.dialog.EditProductDialog;
 import com.xema.cafemidas.dialog.SimpleTextDialog;
 import com.xema.cafemidas.model.ApiResult;
 import com.xema.cafemidas.model.Category;
@@ -101,6 +102,7 @@ public class CategoryActivity extends AppCompatActivity {
         mAdapter.setOnAddProductListener(this::attemptAddProduct);
         mAdapter.setOnDeleteCategoryListener(this::attemptDeleteCategory);
         mAdapter.setOnDeleteProductListener(this::attemptDeleteProduct);
+        mAdapter.setOnEditProductListener(this::attemptEditProduct);
         rvMain.setAdapter(mAdapter);
         rvMain.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -224,6 +226,24 @@ public class CategoryActivity extends AppCompatActivity {
         mAddProductDialog.show();
     }
 
+    private EditProductDialog mEditProductDialog;
+
+    private void attemptEditProduct(Product product, int parentPosition, int childPosition) {
+        mEditProductDialog = new EditProductDialog(this, product);
+        mEditProductDialog.setListener(new EditProductDialog.OnRegisterListener() {
+            @Override
+            public void onRegisterImage(String name, long price, int time, File image, int productId, int type) {
+                editProductWithImage(name, price, time, image, productId, type);
+            }
+
+            @Override
+            public void onRegister(String name, long price, int time, File image, int productId, int type) {
+                editProduct(name, price, time, image, productId, type);
+            }
+        });
+        mEditProductDialog.show();
+    }
+
     private void attemptDeleteCategory(Category category, int position) {
         SimpleTextDialog dialog = new SimpleTextDialog(mContext, "삭제 확인" + "\n\n" + category.getName() + " 를 정말 삭제하시겠습니까?");
         dialog.setOnPositiveListener("삭제", () -> {
@@ -301,9 +321,9 @@ public class CategoryActivity extends AppCompatActivity {
         ApiUtil.getProductService().makeProduct(idPart, pwPart, categoryIdPart, namePart, pricePart, timePart, imagePart).enqueue(new Callback<Product>() {
             @Override
             public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
+                mProductImage = null;
                 LoadingProgressDialog.hideProgress();
                 if (response.code() == 200) {
-                    mProductImage = null;
                     queryProduct();
                 } else {
                     Toast.makeText(mContext, getString(R.string.error_common), Toast.LENGTH_SHORT).show();
@@ -312,10 +332,73 @@ public class CategoryActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
+                mProductImage = null;
                 LoadingProgressDialog.hideProgress();
                 Toast.makeText(mContext, getString(R.string.error_network), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void editProduct(String name, long price, int time, File image, int productId, int type) {
+        LoadingProgressDialog.showProgress(mContext);
+        ApiUtil.getProductService().editProduct(PreferenceHelper.loadId(mContext), PreferenceHelper.loadPw(mContext), productId, type, price, name, time).enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
+                mProductImage = null;
+                LoadingProgressDialog.hideProgress();
+                if (response.code() == 200) {
+                    queryProduct();
+                } else {
+                    Toast.makeText(mContext, getString(R.string.error_common), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
+                mProductImage = null;
+                LoadingProgressDialog.hideProgress();
+                Toast.makeText(mContext, getString(R.string.error_network), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void editProductWithImage(String name, long price, int time, File image, int productId, int type) {
+        if (mProductImage == null) {
+            Toast.makeText(mContext, "이미지를 선택해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            MediaType multipart = MediaType.parse("multipart/form-data");
+            RequestBody requestFile = RequestBody.create(multipart, mProductImage);
+            MultipartBody.Part imagePart = MultipartBody.Part.createFormData("image", mProductImage.getName(), requestFile);
+            MultipartBody.Part idPart = MultipartBody.Part.createFormData("id", PreferenceHelper.loadId(mContext));
+            MultipartBody.Part pwPart = MultipartBody.Part.createFormData("pw", PreferenceHelper.loadPw(mContext));
+            MultipartBody.Part namePart = MultipartBody.Part.createFormData("name", name);
+            MultipartBody.Part pricePart = MultipartBody.Part.createFormData("price", String.valueOf(price));
+            MultipartBody.Part timePart = MultipartBody.Part.createFormData("taking_time", String.valueOf(time));
+            MultipartBody.Part categoryIdPart = MultipartBody.Part.createFormData("category_id", String.valueOf(type));
+            MultipartBody.Part productIdPart = MultipartBody.Part.createFormData("menu_id", String.valueOf(productId));
+
+            LoadingProgressDialog.showProgress(mContext);
+            ApiUtil.getProductService().editProduct(idPart, pwPart, categoryIdPart, productIdPart, namePart, pricePart, timePart, imagePart).enqueue(new Callback<Product>() {
+                @Override
+                public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
+                    mProductImage = null;
+                    LoadingProgressDialog.hideProgress();
+                    if (response.code() == 200) {
+                        queryProduct();
+                    } else {
+                        Toast.makeText(mContext, getString(R.string.error_common), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
+                    mProductImage = null;
+                    LoadingProgressDialog.hideProgress();
+                    Toast.makeText(mContext, getString(R.string.error_network), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 
@@ -374,6 +457,9 @@ public class CategoryActivity extends AppCompatActivity {
         } else if ((requestCode == CROP_REQUEST_CODE) && (resultCode == RESULT_OK)) {
             if (mAddProductDialog != null && mAddProductDialog.isShowing()) {
                 mAddProductDialog.showImage(mProductImage);
+            }
+            if (mEditProductDialog != null && mEditProductDialog.isShowing()) {
+                mEditProductDialog.showImage(mProductImage);
             }
         } else if (resultCode == UCrop.RESULT_ERROR) {
             Toast.makeText(mContext, getString(R.string.error_common), Toast.LENGTH_SHORT).show();
