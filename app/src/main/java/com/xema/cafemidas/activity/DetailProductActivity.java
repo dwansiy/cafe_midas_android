@@ -53,6 +53,8 @@ public class DetailProductActivity extends AppCompatActivity {
     private List<OrderItem> mList;
     private OrderItemAdapter mAdapter;
 
+    private int orderId;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +62,13 @@ public class DetailProductActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mContext = this;
 
-        initToolbar();
-        initAdapter();
-        getServerData();
+
+        if (getIntent() != null) {
+            orderId = getIntent().getIntExtra("id", 0);
+            initToolbar();
+            initAdapter();
+            getServerData();
+        }
     }
 
 
@@ -86,8 +92,7 @@ public class DetailProductActivity extends AppCompatActivity {
 
     private void getServerData() {
         LoadingProgressDialog.showProgress(mContext);
-        // TODO: 2018-05-26 하드코딩 제거
-        ApiUtil.getOrderService().getDetailOrder(PreferenceHelper.loadId(mContext), PreferenceHelper.loadPw(mContext), 13).enqueue(new Callback<List<OrderItem>>() {
+        ApiUtil.getOrderService().getDetailOrder(PreferenceHelper.loadId(mContext), PreferenceHelper.loadPw(mContext), orderId).enqueue(new Callback<List<OrderItem>>() {
             @Override
             public void onResponse(@NonNull Call<List<OrderItem>> call, @NonNull Response<List<OrderItem>> response) {
                 LoadingProgressDialog.hideProgress();

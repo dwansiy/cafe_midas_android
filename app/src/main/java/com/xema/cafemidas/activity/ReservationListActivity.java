@@ -8,20 +8,26 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.xema.cafemidas.R;
+import com.xema.cafemidas.adapter.OrderAdapter;
 import com.xema.cafemidas.common.PreferenceHelper;
 import com.xema.cafemidas.dialog.SimpleTextDialog;
 import com.xema.cafemidas.model.ApiResult;
-import com.xema.cafemidas.model.Category;
+import com.xema.cafemidas.model.Order;
 import com.xema.cafemidas.network.ApiUtil;
 import com.xema.cafemidas.util.LoadingProgressDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,16 +38,18 @@ import retrofit2.Response;
 public class ReservationListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     @BindView(R.id.tb_main)
     Toolbar tbMain;
-    @BindView(R.id.fab_check)
-    FloatingActionButton fabCheck;
     @BindView(R.id.nv_admin)
     NavigationView nvAdmin;
     @BindView(R.id.dl_main)
     DrawerLayout dlMain;
     @BindView(R.id.rv_main)
     RecyclerView rvMain;
+    @BindView(R.id.srl_main)
+    SwipeRefreshLayout srlMain;
 
     private Context mContext;
+    private List<Order> mList;
+    private OrderAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +62,15 @@ public class ReservationListActivity extends AppCompatActivity implements Naviga
         initNavigationDrawer();
         initListeners();
         initAdapter();
+
+        getServerData();
     }
 
     private void initToolbar() {
         setSupportActionBar(tbMain);
         //if (getSupportActionBar() != null)
         //    getSupportActionBar().setDisplayShowTitleEnabled(false);
-        tbMain.setTitle("로딩중...");
+        tbMain.setTitle("주문 목록");
     }
 
     private void initNavigationDrawer() {
@@ -71,13 +81,46 @@ public class ReservationListActivity extends AppCompatActivity implements Naviga
     }
 
     private void initListeners() {
-        fabCheck.setOnClickListener(v -> {
-
-        });
     }
 
     private void initAdapter() {
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
+        rvMain.setLayoutManager(mLayoutManager);
+        mList = new ArrayList<>();
+        mAdapter = new OrderAdapter(this, mList);
+        mAdapter.setHasStableIds(true);
+        rvMain.setAdapter(mAdapter);
+        srlMain.setOnRefreshListener(this::getServerData);
+    }
+
+    private void getServerData() {
+        LoadingProgressDialog.showProgress(mContext);
+        ApiUtil.getOrderService().getOrderList(PreferenceHelper.loadId(mContext), PreferenceHelper.loadPw(mContext), 0).enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Order>> call, @NonNull Response<List<Order>> response) {
+                LoadingProgressDialog.hideProgress();
+                srlMain.setRefreshing(false);
+                if (response.code() == 200) {
+                    List<Order> orderList = response.body();
+                    if (orderList != null) {
+                        mList.clear();
+                        mList.addAll(orderList);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                } else {
+                    Toast.makeText(mContext, getString(R.string.error_common), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Order>> call, @NonNull Throwable t) {
+                LoadingProgressDialog.hideProgress();
+                srlMain.setRefreshing(false);
+                Toast.makeText(mContext, getString(R.string.error_network), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -100,7 +143,7 @@ public class ReservationListActivity extends AppCompatActivity implements Naviga
             Intent intent = new Intent(this, ProfileListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_order) {
-            Intent intent = new Intent(this, DetailProductActivity.class);
+            Intent intent = new Intent(this,CompleteReservationListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sign_out) {
             Toast.makeText(mContext, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();

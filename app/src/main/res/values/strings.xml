@@ -65,4 +65,11 @@ Elit at imperdiet dui accumsan. Consequat nisl vel pretium lectus quam id leo in
 
     <!-- 고객 관리-->
     <string name="empty_user">사용자가 등록되지 않았습니다\n오른쪽 아래 버튼을 눌러 첫번째 사용자를 등록해주세요!</string>
+
+    <string name="format_date_year_day">%d년 %d월 %d일</string>
+    <string name="format_date_day">%d일 전</string>
+    <string name="format_date_hour">%d시간 전</string>
+    <string name="format_date_minute">%d분 전</string>
+    <string name="format_date_second">%d초 전</string>
+    <string name="format_date_just">방금</string>
 </resources>

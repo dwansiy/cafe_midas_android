@@ -1,24 +1,27 @@
 package com.xema.cafemidas.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by xema0 on 2018-05-26.
  */
 
 public class Order {
-    private int uid;
+    private int id;
     private String date;
     private String comment;
     private int state;
     private Profile profile;
+    @SerializedName("taking_time")
     private String time;
     private long price;
 
-    public int getUid() {
-        return uid;
+    public int getId() {
+        return id;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDate() {
