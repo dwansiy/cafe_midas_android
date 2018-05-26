@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.xema.cafemidas.R;
 import com.xema.cafemidas.model.Category;
+import com.xema.cafemidas.widget.FontTextView;
 
 import java.util.ArrayList;
 
@@ -41,7 +42,6 @@ public class OrderCategoryAdapter extends RecyclerView.Adapter<OrderCategoryAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txt_category.setText(list.get(position).getName());
-        requestManager.load("http://blog.jinbo.net/attach/615/200937431.jpg").into(holder.im_category);
         holder.linearLayout.setOnClickListener(v -> {
             onCategoryClickListener.onClick(v, position);
         });
@@ -54,15 +54,15 @@ public class OrderCategoryAdapter extends RecyclerView.Adapter<OrderCategoryAdap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageView im_category;
-        public TextView txt_category;
+
+        public FontTextView txt_category;
         public LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            im_category = (ImageView) itemView.findViewById(R.id.order_im_category);
-            txt_category = (TextView) itemView.findViewById(R.id.order_txt_category);
+
+            txt_category = (FontTextView) itemView.findViewById(R.id.order_txt_category);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.order_linear);
 
         }

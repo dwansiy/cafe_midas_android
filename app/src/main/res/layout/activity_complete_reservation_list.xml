@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="완료된 주문 목록"
+                    android:text="과거 주문 이력"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp" />
 

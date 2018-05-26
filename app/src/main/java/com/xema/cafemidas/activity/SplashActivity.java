@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         CommonUtil.checkKeyHash(this);
         mHandler = new Handler();
-        mHandler.postDelayed(mStartRunnable, 400);
+        mHandler.postDelayed(mStartRunnable, 600);
     }
 
     private Runnable mStartRunnable = () -> {

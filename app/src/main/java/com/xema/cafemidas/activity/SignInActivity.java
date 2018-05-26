@@ -165,7 +165,7 @@ public class SignInActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else if (profile.getType() == Constants.AUTH_USER) {
-                        Intent intent = new Intent(SignInActivity.this, UserMainActivity.class);
+                        Intent intent = new Intent(SignInActivity.this, UserNavigationActivity.class);
                         startActivity(intent);
                         finish();
                     }

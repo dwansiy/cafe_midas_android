@@ -42,6 +42,8 @@
         <activity android:name=".activity.UserBuyListActivity" />
         <activity android:name=".activity.UserOrderActivity" />
         <activity android:name=".activity.UserBuyDetailActivity" />
+        <activity android:name=".activity.UserNavigationActivity"/>
+        <activity android:name=".activity.PendingReservationListActivity"/>
 
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

@@ -4,6 +4,8 @@ import com.xema.cafemidas.model.ApiResult;
 import com.xema.cafemidas.model.Order;
 import com.xema.cafemidas.model.OrderItem;
 import com.xema.cafemidas.model.OrderMenuList;
+import com.xema.cafemidas.model.WaitingOrder;
+import com.xema.cafemidas.model.WaitingTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,4 +43,11 @@ public interface OrderService {
     @FormUrlEncoded
     @POST("/change_order_state/")
     Call<ApiResult> changeOrderState(@Field("id") String id, @Field("pw") String pw, @Field("order_id") int orderId);
+
+
+    @GET("/get_waiting_order/")
+    Call<WaitingOrder> getWaitingOrder();
+
+    @GET("/get_waiting_time/")
+    Call<WaitingTime> getWaitingTime();
 }

@@ -35,4 +35,19 @@
     <color name="colorTeal2">#17262d</color>
 
     <color name="colorOrangeDark">#C8AD80</color>
+
+    <color name="colorZ1">#787878</color>
+    <color name="colorZ2">#b3b3b3</color>
+
+    <color name="colorB1">#3db7b4</color>
+    <color name="colorB2">#77D491</color>
+
+    <color name="colorR1">#FFCC10</color>
+    <color name="colorR2">#FF7952</color>
+
+    <color name="colorC1">#3023AE</color>
+    <color name="colorC2">#C86DD7</color>
+
+    <color name="colorS1">#BE178C</color>
+    <color name="colorS2">#F16C84</color>
 </resources>

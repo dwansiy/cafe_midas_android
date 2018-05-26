@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/order_linear"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:orientation="vertical"
-    android:background="@drawable/border_round_rectangle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    >
-    <ImageView
-        android:layout_marginTop="10dp"
-        android:id="@+id/order_im_category"
-        android:layout_gravity="center"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <TextView
-        android:id="@+id/order_txt_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:text="케익"/>
+    android:background="@drawable/shape_radius_stroke_black"
+    android:orientation="vertical">
 
+    <com.xema.cafemidas.widget.FontTextView
+        android:id="@+id/order_txt_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="4dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="4dp"
+        android:text="케익"
+        android:textColor="@color/colorGray2"
+        android:textSize="15sp"
+        app:font_name="nanum_l.ttf" />
 
 </LinearLayout>

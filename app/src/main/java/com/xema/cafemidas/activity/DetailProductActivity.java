@@ -77,6 +77,9 @@ public class DetailProductActivity extends AppCompatActivity {
         //if (getSupportActionBar() != null)
         //    getSupportActionBar().setDisplayShowTitleEnabled(false);
         //tbMain.setTitle("로딩중...");
+        ivBack.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     private void initAdapter() {

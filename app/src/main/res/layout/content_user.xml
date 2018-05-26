@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.xema.cafemidas.activity.ReservationListActivity">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBlack"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="260dp"
+                android:layout_height="130dp"
+                android:background="@drawable/shape_rectangle_stroke_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <com.xema.cafemidas.widget.FontTextView
+                    android:id="@+id/tv_waiting_queue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="34sp"
+                    app:font_name="nanum_r.ttf" />
+
+                <com.xema.cafemidas.widget.FontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="대기 예약 수"
+                    android:textColor="@color/colorGray6"
+                    android:textSize="14sp"
+                    app:font_name="nanum_b.ttf" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.5" />
+
+            <LinearLayout
+                android:layout_width="260dp"
+                android:layout_height="130dp"
+                android:background="@drawable/shape_rectangle_stroke_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <com.xema.cafemidas.widget.FontTextView
+                    android:id="@+id/tv_waiting_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="34sp"
+                    app:font_name="nanum_r.ttf" />
+
+                <com.xema.cafemidas.widget.FontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="예상 대기시간"
+                    android:textColor="@color/colorGray6"
+                    android:textSize="14sp"
+                    app:font_name="nanum_b.ttf" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.5" />
+
+            <LinearLayout
+                android:layout_width="260dp"
+                android:layout_height="130dp"
+                android:background="@drawable/shape_rectangle_stroke_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <com.xema.cafemidas.widget.FontTextView
+                    android:id="@+id/tv_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="34sp"
+                    app:font_name="nanum_r.ttf" />
+
+                <com.xema.cafemidas.widget.FontTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="나의 포인트"
+                    android:textColor="@color/colorGray6"
+                    android:textSize="14sp"
+                    app:font_name="nanum_b.ttf" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.constraint.ConstraintLayout>

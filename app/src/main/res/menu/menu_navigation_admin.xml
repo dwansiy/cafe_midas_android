@@ -11,7 +11,7 @@
         <item
             android:id="@+id/nav_order"
             android:icon="@drawable/ic_order"
-            android:title="주문 관리" />
+            android:title="과거 주문 이력" />
         <item
             android:id="@+id/nav_customer"
             android:icon="@drawable/ic_face"
