@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
+    android:layout_height="wrap_content"
     android:background="@color/colorGray1"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -13,9 +13,33 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="61dp"
+            android:layout_height="61dp"
+            android:layout_gravity="center"
+            android:src="@color/colorWhite"
+            app:riv_border_color="@color/colorGray4"
+            app:riv_border_width="1px"
+            app:riv_corner_radius="200dp" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_profile_default"
+            app:riv_corner_radius="200dp" />
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
         android:orientation="horizontal">
 
         <com.xema.cafemidas.widget.FontTextView
@@ -40,8 +64,8 @@
     <View
         android:layout_width="16dp"
         android:layout_height="1px"
-        android:layout_marginBottom="14dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
         android:background="@color/colorWhite" />
 
     <TextView
@@ -50,7 +74,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="NAME 자리"
+        android:text="NAME"
         android:textColor="@color/colorWhite"
         android:textSize="12sp" />
 
@@ -60,7 +84,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="COMMENT 자리"
+        android:text="COMMENT"
         android:textColor="@color/colorWhite"
         android:textSize="12sp" />
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,12 +58,12 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ListItem
         final Profile profile = mDataList.get(position);
 
         holder.tvName.setText(profile.getName());
-        holder.tvComment.setText(profile.getComment());
+        holder.tvComment.setText(TextUtils.isEmpty(profile.getComment()) ? "X" : profile.getComment());
         GlideApp.with(mContext).load(Constants.BASE_URL + profile.getProfileImage()).into(holder.ivProfile);
         if (profile.getType() == 2) {
-            holder.tvAuth.setText("최고 관리자");
+            holder.tvAuth.setText("관리자");
         } else if (profile.getType() == 1) {
-            holder.tvAuth.setText("서브 관리자");
+            holder.tvAuth.setText("관리자");
         } else if (profile.getType() == 0) {
             holder.tvAuth.setText("사용자");
         }

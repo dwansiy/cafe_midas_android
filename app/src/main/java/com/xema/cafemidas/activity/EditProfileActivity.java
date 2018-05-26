@@ -122,6 +122,9 @@ public class EditProfileActivity extends AppCompatActivity {
         public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
             LoadingProgressDialog.hideProgress();
             if (response.code() == 200) {
+                Profile body = response.body();
+                if (body != null)
+                    PreferenceHelper.saveMyProfile(mContext, body);
                 Toast.makeText(mContext, "수정되었습니다", Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK);
                 finish();

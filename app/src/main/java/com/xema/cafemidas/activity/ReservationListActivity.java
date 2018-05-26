@@ -15,14 +15,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xema.cafemidas.R;
 import com.xema.cafemidas.adapter.OrderAdapter;
+import com.xema.cafemidas.common.Constants;
+import com.xema.cafemidas.common.GlideApp;
 import com.xema.cafemidas.common.PreferenceHelper;
 import com.xema.cafemidas.dialog.SimpleTextDialog;
 import com.xema.cafemidas.model.ApiResult;
 import com.xema.cafemidas.model.Order;
+import com.xema.cafemidas.model.Profile;
 import com.xema.cafemidas.network.ApiUtil;
 import com.xema.cafemidas.util.LoadingProgressDialog;
 
@@ -64,6 +70,17 @@ public class ReservationListActivity extends AppCompatActivity implements Naviga
         initAdapter();
 
         getServerData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        View view = nvAdmin.getHeaderView(0);
+        Profile profile = PreferenceHelper.loadMyProfile(mContext);
+        if (profile == null) return;
+        GlideApp.with(mContext).load(Constants.BASE_URL + profile.getProfileImage()).into((ImageView) view.findViewById(R.id.iv_profile));
+        ((TextView) view.findViewById(R.id.tv_name)).setText(profile.getName());
+        ((TextView) view.findViewById(R.id.tv_comment)).setText(profile.getComment());
     }
 
     private void initToolbar() {
@@ -143,7 +160,7 @@ public class ReservationListActivity extends AppCompatActivity implements Naviga
             Intent intent = new Intent(this, ProfileListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_order) {
-            Intent intent = new Intent(this,CompleteReservationListActivity.class);
+            Intent intent = new Intent(this, CompleteReservationListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_sign_out) {
             Toast.makeText(mContext, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
