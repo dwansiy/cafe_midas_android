@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.xema.cafemidas.R;
 import com.xema.cafemidas.common.Constants;
 import com.xema.cafemidas.common.GlideApp;
@@ -181,8 +183,13 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void attemptSignUp(String id, String password, String name) {
+        String firebaseToken = FirebaseInstanceId.getInstance().getToken();
+        if (TextUtils.isEmpty(firebaseToken)) {
+            firebaseToken = "000000";
+        }
+
         LoadingProgressDialog.showProgress(this);
-        ApiUtil.getAccountService().signUp(id, password, name).enqueue(new Callback<ApiResult>() {
+        ApiUtil.getAccountService().signUp(id, password, name,firebaseToken).enqueue(new Callback<ApiResult>() {
             @Override
             public void onResponse(@NonNull Call<ApiResult> call, @NonNull Response<ApiResult> response) {
                 LoadingProgressDialog.hideProgress();

@@ -23,7 +23,7 @@ import retrofit2.http.Query;
 public interface AccountService {
     @FormUrlEncoded
     @POST("/add_user/")
-    Call<ApiResult> signUp(@Field("id") String id, @Field("pw") String password, @Field("name") String name);
+    Call<ApiResult> signUp(@Field("id") String id, @Field("pw") String password, @Field("name") String name, @Field("fcm_token") String fcmToken);
 
     @FormUrlEncoded
     @POST("/login/")
@@ -60,10 +60,9 @@ public interface AccountService {
     @POST("/edit_user_by_id/")
     Call<Profile> editProfileById(@Part MultipartBody.Part id, @Part MultipartBody.Part pw, @Part MultipartBody.Part uid, @Part MultipartBody.Part name, @Part MultipartBody.Part image, @Part MultipartBody.Part comment);
 
-
     //개인정보수정(관리자가- 사진없을때)
     @FormUrlEncoded
-    @POST("/remove_user_by_id/")
+    @POST("/edit_user_by_id/")
     Call<Profile> editProfileById(@Field("id") String id, @Field("pw") String pw, @Field("uid") int uid, @Field("name") String name, @Field("comment") String comment);
 
 }

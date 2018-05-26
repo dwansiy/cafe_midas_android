@@ -60,11 +60,11 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ListItem
         holder.tvName.setText(profile.getName());
         holder.tvComment.setText(TextUtils.isEmpty(profile.getComment()) ? "X" : profile.getComment());
         GlideApp.with(mContext).load(Constants.BASE_URL + profile.getProfileImage()).into(holder.ivProfile);
-        if (profile.getType() == 2) {
+        if (profile.getType() == Constants.AUTH_SUPER_ADMIN) {
             holder.tvAuth.setText("관리자");
-        } else if (profile.getType() == 1) {
+        } else if (profile.getType() == Constants.AUTH_SUB_ADMIN) {
             holder.tvAuth.setText("관리자");
-        } else if (profile.getType() == 0) {
+        } else if (profile.getType() == Constants.AUTH_USER) {
             holder.tvAuth.setText("사용자");
         }
 

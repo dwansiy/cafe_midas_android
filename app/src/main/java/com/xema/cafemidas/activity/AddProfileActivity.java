@@ -71,7 +71,7 @@ public class AddProfileActivity extends AppCompatActivity {
         }
 
         LoadingProgressDialog.showProgress(this);
-        ApiUtil.getAccountService().signUp(id, pw, name).enqueue(new Callback<ApiResult>() {
+        ApiUtil.getAccountService().signUp(id, pw, name, "000000").enqueue(new Callback<ApiResult>() {
             @Override
             public void onResponse(@NonNull Call<ApiResult> call, @NonNull Response<ApiResult> response) {
                 LoadingProgressDialog.hideProgress();
