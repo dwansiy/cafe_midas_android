@@ -133,6 +133,49 @@
             android:layout_marginStart="3dp"
             android:background="@color/colorGray7" />
 
+        <LinearLayout
+            android:id="@+id/ll_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="2dp" />
+
+                <EditText
+                    android:id="@+id/edt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@null"
+                    android:hint="NICKNAME"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingBottom="9dp"
+                    android:paddingTop="9dp"
+                    android:textColor="@color/colorGray7"
+                    android:textColorHint="@color/colorGray3"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginStart="3dp"
+                android:background="@color/colorGray7" />
+        </LinearLayout>
         <!--
         <CheckBox
             android:id="@+id/cb_auto_sign_in"

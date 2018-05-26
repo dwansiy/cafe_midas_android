@@ -55,6 +55,16 @@ public class CategoryAdapter extends ExpandableRecyclerAdapter<Category, Product
         this.onDeleteCategoryListener = onDeleteCategoryListener;
     }
 
+    private OnDeleteProductListener onDeleteProductListener;
+
+    public interface OnDeleteProductListener {
+        void onDeleteProduct(Product product, int parentPosition, int childPosition);
+    }
+
+    public void setOnDeleteProductListener(OnDeleteProductListener onDeleteProductListener) {
+        this.onDeleteProductListener = onDeleteProductListener;
+    }
+
     public CategoryAdapter(Context context, @NonNull List<Category> categoryList) {
         super(categoryList);
         mContext = context;
@@ -82,7 +92,7 @@ public class CategoryAdapter extends ExpandableRecyclerAdapter<Category, Product
 
     @Override
     public void onBindChildViewHolder(@NonNull ProductViewHolder productViewHolder, int parentPosition, int childPosition, @NonNull Product product) {
-        productViewHolder.bind(mContext, product);
+        productViewHolder.bind(mContext, product, onDeleteProductListener, parentPosition, childPosition);
     }
 
     final static class CategoryViewHolder extends ParentViewHolder {
@@ -98,7 +108,7 @@ public class CategoryAdapter extends ExpandableRecyclerAdapter<Category, Product
         CategoryViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(v -> {
+            llBackground.setOnClickListener(v -> {
                 if (isExpanded()) collapseView();
                 else expandView();
             });
@@ -145,15 +155,22 @@ public class CategoryAdapter extends ExpandableRecyclerAdapter<Category, Product
         TextView tvName;
         @BindView(R.id.tv_price)
         TextView tvPrice;
+        @BindView(R.id.ll_background)
+        LinearLayout llBackground;
 
         ProductViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(Context context, Product product) {
+        void bind(Context context, Product product, OnDeleteProductListener onDeleteProductListener, int parentPosition, int childPosition) {
             tvName.setText(product.getName());
             tvPrice.setText(context.getString(R.string.format_price, CommonUtil.toDecimalFormat(product.getPrice())));
+            llBackground.setOnLongClickListener(v -> {
+                if (onDeleteProductListener != null)
+                    onDeleteProductListener.onDeleteProduct(product, parentPosition, childPosition);
+                return false;
+            });
         }
     }
 }

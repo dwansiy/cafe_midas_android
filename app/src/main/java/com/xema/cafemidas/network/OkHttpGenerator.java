@@ -13,8 +13,8 @@ class OkHttpGenerator {
     static OkHttpClient getInstance(boolean isDebug) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 //.retryOnConnectionFailure(false)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS);
+                .readTimeout(20, TimeUnit.SECONDS)
+                .connectTimeout(20, TimeUnit.SECONDS);
 
         if (isDebug) {
             builder.addNetworkInterceptor(new StethoInterceptor());

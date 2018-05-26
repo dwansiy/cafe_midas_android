@@ -13,7 +13,7 @@ public class Category implements Parent<Product> {
     private int id;
     private String name;
     // TODO: 2018-05-26
-    private List<Product> productList;
+    private List<Product> productList = new ArrayList<>();
 
     public int getId() {
         return id;

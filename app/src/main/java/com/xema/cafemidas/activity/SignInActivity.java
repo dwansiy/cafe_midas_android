@@ -54,6 +54,10 @@ public class SignInActivity extends AppCompatActivity {
     TextView tvHelpRight;
     @BindView(R.id.ll_bottom)
     LinearLayout llBottom;
+    @BindView(R.id.edt_name)
+    EditText edtName;
+    @BindView(R.id.ll_name)
+    LinearLayout llName;
 
     private enum Mode {
         SIGN_IN, SIGN_UP
@@ -130,9 +134,10 @@ public class SignInActivity extends AppCompatActivity {
     private void attemptAction(View view) {
         String id = edtId.getText().toString();
         String password = edtPassword.getText().toString();
+        String name = edtName.getText().toString();
 
         if (isSignUpMode()) {
-            attemptSignUp(id, password);
+            attemptSignUp(id, password, name);
         } else {
             attemptSignIn(id, password);
         }
@@ -173,9 +178,9 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    private void attemptSignUp(String id, String password) {
+    private void attemptSignUp(String id, String password, String name) {
         LoadingProgressDialog.showProgress(this);
-        ApiUtil.getAccountService().signUp(id, password).enqueue(new Callback<ApiResult>() {
+        ApiUtil.getAccountService().signUp(id, password, name).enqueue(new Callback<ApiResult>() {
             @Override
             public void onResponse(@NonNull Call<ApiResult> call, @NonNull Response<ApiResult> response) {
                 LoadingProgressDialog.hideProgress();
@@ -213,10 +218,12 @@ public class SignInActivity extends AppCompatActivity {
     private void changeSignUpPage() {
         mode = Mode.SIGN_UP;
 
+        edtName.setText("");
         edtPassword.setText("");
         edtId.setText("");
         edtId.requestFocus();
 
+        llName.setVisibility(View.VISIBLE);
         tvLogin.setVisibility(View.GONE);
         tvNewAccount.setVisibility(View.VISIBLE);
         btnAction.setText("SIGN UP");
@@ -227,10 +234,12 @@ public class SignInActivity extends AppCompatActivity {
     private void changeSignInPage() {
         mode = Mode.SIGN_IN;
 
+        edtName.setText("");
         edtPassword.setText("");
         edtId.setText("");
         edtId.requestFocus();
 
+        llName.setVisibility(View.GONE);
         tvNewAccount.setVisibility(View.GONE);
         tvLogin.setVisibility(View.VISIBLE);
         btnAction.setText("GO");

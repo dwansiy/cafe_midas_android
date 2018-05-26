@@ -5,19 +5,19 @@ package com.xema.cafemidas.model;
  */
 
 public class Product {
-    private int uid;
+    private int id;
     private long price;
     private String name;
     private int type;
     private int orderId;
     private String image;
 
-    public int getUid() {
-        return uid;
+    public int getId() {
+        return id;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public long getPrice() {

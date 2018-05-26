@@ -1,8 +1,11 @@
 package com.xema.cafemidas.util;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.os.Build;
 import android.text.format.DateFormat;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -44,5 +47,15 @@ public class CommonUtil {
     private static String getDateFormat(Locale locale) {
         //return DateFormat.getBestDateTimePattern(locale, "MM/dd/yyyy hh:mm:ss aa");
         return DateFormat.getBestDateTimePattern(locale, "MM/dd/yyyy");
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        if (imm != null)
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

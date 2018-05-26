@@ -1,5 +1,6 @@
 package com.xema.cafemidas.network.service;
 
+import com.xema.cafemidas.model.ApiResult;
 import com.xema.cafemidas.model.Category;
 import com.xema.cafemidas.model.Product;
 
@@ -26,18 +27,18 @@ public interface ProductService {
 
     @FormUrlEncoded
     @POST("/delete_category/")
-    Call<Category> deleteCategory(@Field("id") String id, @Field("pw") String password, @Field("category_id") int categoryId);
+    Call<ApiResult> deleteCategory(@Field("id") String id, @Field("pw") String password, @Field("category_id") int categoryId);
 
     @GET("/get_categories/")
     Call<List<Category>> getCategoryList();
 
     @Multipart
-    @POST("/create_category/")
-    Call<Product> makeProduct(@Part MultipartBody.Part id, @Part MultipartBody.Part pw, @Part MultipartBody.Part categoryId, @Part MultipartBody.Part name, @Part MultipartBody.Part price, @Part MultipartBody.Part image);
+    @POST("/create_menu/")
+    Call<Product> makeProduct(@Part MultipartBody.Part id, @Part MultipartBody.Part pw, @Part MultipartBody.Part categoryId, @Part MultipartBody.Part name, @Part MultipartBody.Part price, @Part MultipartBody.Part time, @Part MultipartBody.Part image);
 
     @FormUrlEncoded
     @POST("/delete_menu/")
-    Call<Product> deleteProduct(@Field("id") String id, @Field("pw") String password, @Field("menu_id") int menuId);
+    Call<ApiResult> deleteProduct(@Field("id") String id, @Field("pw") String password, @Field("menu_id") int menuId);
 
     @GET("/get_menus/")
     Call<List<Product>> getProductList();

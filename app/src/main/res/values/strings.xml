@@ -62,4 +62,7 @@ Elit at imperdiet dui accumsan. Consequat nisl vel pretium lectus quam id leo in
     <string name="message_new_product">새로운 상품등록</string>
     <string name="hint_new_product">새 상품</string>
     <string name="message_error_no_input_price">금액을 입력해주세요</string>
+
+    <!-- 고객 관리-->
+    <string name="empty_user">사용자가 등록되지 않았습니다\n오른쪽 아래 버튼을 눌러 첫번째 사용자를 등록해주세요!</string>
 </resources>

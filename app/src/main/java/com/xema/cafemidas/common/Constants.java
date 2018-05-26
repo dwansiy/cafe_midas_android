@@ -11,5 +11,7 @@ public class Constants {
     public static final int AUTH_SUB_ADMIN = 1;
     public static final int AUTH_USER = 0;
 
-    public static final String BASE_URL = "http://192.168.0.30:8000/";
+    public static final String BASE_URL = "http://192.168.0.30:8000";
+
+    public static final int REQUEST_CODE_ADD_PROFILE = 300;
 }

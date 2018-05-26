@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class Profile {
     private int uid;
     private String name;
-    @SerializedName("photo_url")
+    @SerializedName("profile_image")
     private String profileImage;
     private int type;//슈퍼관리자 : 2, 서브관리자 : 1, 사용자 : 0
     private long point;
