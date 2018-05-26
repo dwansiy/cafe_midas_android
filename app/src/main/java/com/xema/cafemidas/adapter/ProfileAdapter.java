@@ -107,7 +107,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ListItem
 
     @Override
     public long getItemId(int position) {
-        return mDataList != null ? mDataList.get(0).getUid() : position;
+        return mDataList != null ? mDataList.get(position).getUid() : position;
     }
 
     @Override

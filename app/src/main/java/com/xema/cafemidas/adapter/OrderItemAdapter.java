@@ -54,10 +54,9 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.List
         GlideApp.with(mContext).load(Constants.BASE_URL + product.getImage()).into(holder.ivImage);
     }
 
-
     @Override
     public long getItemId(int position) {
-        return mDataList != null ? mDataList.get(0).getId() : position;
+        return mDataList != null ? mDataList.get(position).getId() : position;
     }
 
     @Override

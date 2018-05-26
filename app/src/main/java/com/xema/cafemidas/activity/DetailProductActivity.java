@@ -4,12 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xema.cafemidas.R;
@@ -18,6 +20,7 @@ import com.xema.cafemidas.common.PreferenceHelper;
 import com.xema.cafemidas.model.OrderItem;
 import com.xema.cafemidas.network.ApiUtil;
 import com.xema.cafemidas.util.LoadingProgressDialog;
+import com.xema.cafemidas.widget.FontTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +36,20 @@ import retrofit2.Response;
  */
 
 public class DetailProductActivity extends AppCompatActivity {
-    @BindView(R.id.rv_main)
-    RecyclerView rvMain;
+
+    @BindView(R.id.ftv_title)
+    FontTextView ftvTitle;
+    @BindView(R.id.tv_price)
+    TextView tvPrice;
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
     @BindView(R.id.tb_main)
     Toolbar tbMain;
-    @BindView(R.id.iv_image)
-    ImageView ivImage;
+    @BindView(R.id.abl_main)
+    AppBarLayout ablMain;
+    @BindView(R.id.rv_main)
+    RecyclerView rvMain;
+    
     private Context mContext;
 
     private List<OrderItem> mList;
