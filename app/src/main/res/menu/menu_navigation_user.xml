@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_monthly"
+            android:icon="@drawable/ic_order"
+            android:title="월별 구매 내역" />
+        <item
+            android:id="@+id/nav_reservation"
+            android:icon="@drawable/ic_chart"
+            android:title="예약 현황" />
+    </group>
+
+    <item android:title="기타">
+        <menu>
+            <item
+                android:id="@+id/nav_edit_my_profile"
+                android:icon="@drawable/ic_setting"
+                android:title="내 정보 수정" />
+            <item
+                android:id="@+id/nav_sign_out"
+                android:icon="@drawable/ic_sign_out"
+                android:title="로그아웃" />
+            <item
+                android:id="@+id/nav_drop_out"
+                android:icon="@drawable/ic_sign_out"
+                android:title="회원 탈퇴" />
+        </menu>
+    </item>
+
+</menu>

@@ -101,7 +101,7 @@ public class UserBuyListActivity extends AppCompatActivity {
         String year = buySpinnerYear.getSelectedItem().toString().replace("년", "");
         String month = buySpinnerMonth.getSelectedItem().toString().replace("월", "");
         Log.d("buy_list", year + " // " + month);
-        retrofit2.Call<List<Order>> call = ApiUtil.getOrderService().getOrderList(PreferenceHelper.loadId(this), PreferenceHelper.loadPw(this), 2, Integer.parseInt(year), Integer.parseInt(month));
+        retrofit2.Call<List<Order>> call = ApiUtil.getOrderService().getOrderList(PreferenceHelper.loadId(this), PreferenceHelper.loadPw(this), 1, Integer.parseInt(year), Integer.parseInt(month));
 
         call.enqueue(new Callback<List<Order>>() {
             @Override
