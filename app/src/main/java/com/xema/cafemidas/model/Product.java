@@ -71,4 +71,16 @@ public class Product {
     public void setTakingTime(int takingTime) {
         this.takingTime = takingTime;
     }
+
+
+    ///
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }

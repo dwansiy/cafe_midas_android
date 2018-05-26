@@ -163,7 +163,9 @@ public class SignInActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else if (profile.getType() == Constants.AUTH_USER) {
-                        Toast.makeText(SignInActivity.this, "사용자 아이디", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignInActivity.this, UserMainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 } else {
                     Toast.makeText(SignInActivity.this, "아이디 혹은 패스워드가 다릅니다.", Toast.LENGTH_SHORT).show();
