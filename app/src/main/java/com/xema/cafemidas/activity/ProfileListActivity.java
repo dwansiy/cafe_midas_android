@@ -14,7 +14,9 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xema.cafemidas.R;
@@ -36,6 +38,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileListActivity extends AppCompatActivity {
+
+
+    @BindView(R.id.iv_back)
+    ImageView ivBack;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
     @BindView(R.id.tb_main)
     Toolbar tbMain;
     @BindView(R.id.edt_search)
@@ -46,7 +54,6 @@ public class ProfileListActivity extends AppCompatActivity {
     LinearLayout llEmpty;
     @BindView(R.id.fab_add)
     FloatingActionButton fabAdd;
-
     private List<Profile> mList;
     private ProfileAdapter mAdapter;
 
@@ -76,7 +83,10 @@ public class ProfileListActivity extends AppCompatActivity {
         setSupportActionBar(tbMain);
         //if (getSupportActionBar() != null)
         //    getSupportActionBar().setDisplayShowTitleEnabled(false);
-        tbMain.setTitle(getString(R.string.common_loading));
+        //tbMain.setTitle(getString(R.string.common_loading));
+        ivBack.setOnClickListener(v -> {
+            finish();
+        });
     }
 
     private void initListeners() {
@@ -132,7 +142,6 @@ public class ProfileListActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     List<Profile> profileList = response.body();
                     if (profileList != null) {
-                        tbMain.setTitle("사용자 " + mList.size() + "명");
                         if (profileList.isEmpty()) {
                             rvMain.setVisibility(View.GONE);
                             llEmpty.setVisibility(View.VISIBLE);
@@ -143,6 +152,7 @@ public class ProfileListActivity extends AppCompatActivity {
                             mList.addAll(profileList);
                             mAdapter.notifyDataSetChanged();
                         }
+                        tvTitle.setText("사용자 " + mList.size() + "명");
                     } else {
                         Toast.makeText(mContext, getString(R.string.error_common), Toast.LENGTH_SHORT).show();
                     }
