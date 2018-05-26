@@ -87,6 +87,8 @@ public class ReservationListActivity extends AppCompatActivity implements Naviga
             Intent intent = new Intent(this, ProfileListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_order) {
+            Intent intent = new Intent(this, DetailProductActivity.class);
+            startActivity(intent);
         }
         dlMain.closeDrawer(GravityCompat.START);
         return true;

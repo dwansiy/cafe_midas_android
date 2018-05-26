@@ -65,23 +65,21 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ListItem
         }
 
         holder.llContainer.setOnLongClickListener(v -> {
-            if (profile.getUid() != PreferenceHelper.loadMyProfile(mContext).getUid()) {
-                PopupMenu menu = new PopupMenu(mContext, holder.itemView);
-                ((Activity) mContext).getMenuInflater().inflate(R.menu.menu_delete_edit, menu.getMenu());
-                menu.setOnMenuItemClickListener(item -> {
-                    if (item.getItemId() == R.id.menu_delete) {
-                        if (profile.getUid() != PreferenceHelper.loadMyProfile(mContext).getUid()) {
-                            attemptDeleteProfile(profile, position);
-                        } else {
-                            Toast.makeText(mContext, "자기 자신은 삭제할 수 없습니다", Toast.LENGTH_SHORT).show();
-                        }
-                    } else if (item.getItemId() == R.id.menu_edit) {
-                        // TODO: 2018-05-26 수정하기
+            PopupMenu menu = new PopupMenu(mContext, holder.itemView);
+            ((Activity) mContext).getMenuInflater().inflate(R.menu.menu_delete_edit, menu.getMenu());
+            menu.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == R.id.menu_delete) {
+                    if (profile.getUid() != PreferenceHelper.loadMyProfile(mContext).getUid()) {
+                        attemptDeleteProfile(profile, position);
+                    } else {
+                        Toast.makeText(mContext, "자기 자신은 삭제할 수 없습니다", Toast.LENGTH_SHORT).show();
                     }
-                    return false;
-                });
-                menu.show();
-            }
+                } else if (item.getItemId() == R.id.menu_edit) {
+                    // TODO: 2018-05-26 수정하기
+                }
+                return false;
+            });
+            menu.show();
             return false;
         });
     }

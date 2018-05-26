@@ -357,7 +357,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         if (requestCode == GALLERY_REQUEST_CODE) {
             mProductImage = new File(mContext.getCacheDir(), System.currentTimeMillis() + "_crop");
-            UCrop.of(originalUri, Uri.fromFile(mProductImage)).withOptions(options).withAspectRatio(5, 3).withMaxResultSize(1000, 600).start(this, CROP_REQUEST_CODE);
+            UCrop.of(originalUri, Uri.fromFile(mProductImage)).withOptions(options).withAspectRatio(1, 1).withMaxResultSize(500, 500).start(this, CROP_REQUEST_CODE);
         }
     }
 
