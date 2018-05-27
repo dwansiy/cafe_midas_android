@@ -115,10 +115,12 @@ public class UserOrderActivity extends AppCompatActivity {
     }
 
     public void get(int position) {
-        OrderDialog dialog = new OrderDialog(this, menu_list.get(position).getName()
-                , String.valueOf(menu_list.get(position).getPrice()));
-        dialog.setListener(this::getNum);
-        dialog.show();
+        if (menu_list != null && menu_list.size() > position) {
+            OrderDialog dialog = new OrderDialog(this, menu_list.get(position).getName()
+                    , String.valueOf(menu_list.get(position).getPrice()));
+            dialog.setListener(this::getNum);
+            dialog.show();
+        }
     }
 
     public void onClickCategory(int position) {

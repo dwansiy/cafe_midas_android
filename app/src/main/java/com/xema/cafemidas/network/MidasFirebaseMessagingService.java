@@ -37,7 +37,7 @@ public class MidasFirebaseMessagingService extends FirebaseMessagingService {
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, "1")
-                //.setSmallIcon(R.drawable.img_logo)
+                .setSmallIcon(R.drawable.img_logo)
                 .setContentTitle("CAFE MIDAS")
                 .setContentText("주문하신 제품이 준비되었습니다.")
                 .setAutoCancel(true)

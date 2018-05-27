@@ -77,20 +77,22 @@ public class UserBuyDetailActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Order> call, Response<Order> response) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(UserBuyDetailActivity.this);
-                    alert.setMessage("주문 완료되었습니다.")
-                            .setCancelable(false)
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //if (buy_detail_list != null) buy_detail_list.clear();
-                                    //if (intent_list != null) intent_list.clear();
-                                    //mAdapter.notifyDataSetChanged();
-                                    Intent intent = new Intent(UserBuyDetailActivity.this, UserNavigationActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                    startActivity(intent);
-                                    //finish();
-                                }
-                            }).show();
+                    if (!UserBuyDetailActivity.this.isFinishing()) {
+                        alert.setMessage("주문 완료되었습니다.")
+                                .setCancelable(false)
+                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //if (buy_detail_list != null) buy_detail_list.clear();
+                                        //if (intent_list != null) intent_list.clear();
+                                        //mAdapter.notifyDataSetChanged();
+                                        Intent intent = new Intent(UserBuyDetailActivity.this, UserNavigationActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                        startActivity(intent);
+                                        //finish();
+                                    }
+                                }).show();
+                    }
                 }
 
                 @Override
