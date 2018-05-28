@@ -111,7 +111,7 @@ public class UserNavigationActivity extends AppCompatActivity implements Navigat
                     new Thread(() -> {
                         while (counter1 < profile.getPoint()) {
                             try {
-                                Thread.sleep(5);
+                                Thread.sleep(3);
                             } catch (InterruptedException e) {
                             }
                             tvPoint.post(() -> tvPoint.setText("" + counter1));
@@ -286,7 +286,7 @@ public class UserNavigationActivity extends AppCompatActivity implements Navigat
                     Toast.makeText(mContext, getString(R.string.error_network), Toast.LENGTH_SHORT).show();
                 }
             });
-            dialog.show();
         });
+        dialog.show();
     }
 }

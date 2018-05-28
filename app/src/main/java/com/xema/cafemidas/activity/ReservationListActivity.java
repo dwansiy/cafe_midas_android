@@ -204,7 +204,7 @@ public class ReservationListActivity extends AppCompatActivity implements Naviga
                     Toast.makeText(mContext, getString(R.string.error_network), Toast.LENGTH_SHORT).show();
                 }
             });
-            dialog.show();
         });
+        dialog.show();
     }
 }

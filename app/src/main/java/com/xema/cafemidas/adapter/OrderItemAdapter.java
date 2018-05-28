@@ -52,7 +52,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.List
         holder.tvName.setText(product.getName());
         holder.tvTakingTime.setText(product.getTakingTime()+"분");
         holder.tvPrice.setText(CommonUtil.toDecimalFormat(product.getPrice()) + " 원");
-        GlideApp.with(mContext).load(Constants.BASE_URL + product.getImage()).into(holder.ivImage);
+        GlideApp.with(mContext).load(Constants.BASE_URL + product.getImage()).circleCrop().into(holder.ivImage);
     }
 
     @Override

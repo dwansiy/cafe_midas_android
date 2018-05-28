@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.xema.cafemidas.R;
+import com.xema.cafemidas.common.Constants;
 import com.xema.cafemidas.model.Product;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class OrderMenuAdapter extends RecyclerView.Adapter<OrderMenuAdapter.View
         holder.txt_category.setText(String.valueOf(list.get(position).getCategory()));
         holder.txt_name.setText(list.get(position).getName());
         holder.txt_price.setText(String.valueOf(list.get(position).getPrice()));
-        requestManager.load("http://192.168.0.30:8000" + list.get(position).getImage()).
+        requestManager.load(Constants.BASE_URL + list.get(position).getImage()).
                 apply(RequestOptions.circleCropTransform()).into(holder.im_menu);
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
